@@ -4,7 +4,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
  As applications grow in functionality, they also grow in size. Budgets is a feature in the Angular CLI which allows you to set budget thresholds in your configuration to ensure parts of your application stay within boundaries which you set
 
- ```json
+ ```
  {
   ...
   "configurations": {
@@ -59,7 +59,7 @@ Check the size for all file ( without stats.json), , use type `initial`:
 ```
 {
   "type": "initial",
-  "maximumWarning": "600kb",
+  "maximumWarning": "2mb",
   "maximumError": "5mb"
 },
 
