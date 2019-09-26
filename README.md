@@ -2,26 +2,75 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.6.
 
-## Development server
+ As applications grow in functionality, they also grow in size. Budgets is a feature in the Angular CLI which allows you to set budget thresholds in your configuration to ensure parts of your application stay within boundaries which you set
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+ ```json
+ {
+  ...
+  "configurations": {
+    "production": {
+      ...
+      budgets: []
+    }
+  }
+}
+```
 
-## Code scaffolding
+[See more](https://github.com/angular/angular-cli/blob/master/docs/documentation/stories/budgets.md)
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-## Build
+Check for each file, use type `bundle`:
+```
+  "budgets": [
+          {
+            "type": "bundle",
+            "name": "polyfills",
+            "baseline": "150kb",
+            "maximumWarning": "50kb",
+            "maximumError": "150kb"
+          },
+          {
+            "type": "bundle",
+            "name": "vendor",
+            "baseline": "900kb",
+            "maximumWarning": "100kb",
+            "maximumError": "200kb"
+          },
+          {
+            "type": "bundle",
+            "name": "styles",
+            "baseline": "280kb",
+            "maximumWarning": "50kb",
+            "maximumError": "100kb"
+          },
+          {
+            "type": "bundle",
+            "name": "main",
+            "baseline": "200kb",
+            "maximumWarning": "100kb",
+            "maximumError": "150kb"
+          },
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+        ]
+```
 
-## Running unit tests
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Check the size for all file ( without stats.json), , use type `initial`:
+```
+{
+  "type": "initial",
+  "maximumWarning": "600kb",
+  "maximumError": "5mb"
+},
 
-## Running end-to-end tests
+```
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+A new budget, `anyComponentStyle`, has been added in version 8.2, allowing to check your component CSS sizes. This is a very nice feature because I’ve audited quite a few projects where there was no problem in the JS bundles, but where bad practices with CSS imports resulted in bloated CSS files. As component CSS are self-contained, it’s quite easy to make a mistake and import the whole Material or Bootstrap CSS into each component…
 
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+```
+{
+  "type": "anyComponentStyle",
+  "maximumWarning": "6kb",
+  "maximumError": "10kb"
+}
+```
